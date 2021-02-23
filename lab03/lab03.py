@@ -147,7 +147,22 @@ class PrefixSearcher():
         length up to n). If q is longer than n, then raise an
         Exception.
         """
-        pass
+        def comps(x,y):
+            if y < x and y in x:
+                return 0
+            elif x == y:
+                return 0
+            elif x > y:
+                return 1
+            else:
+                return -1
+        if len(q) > self.len:
+            raise Exception
+        else:
+            if mybinsearch(self.mylst,q,comps) != -1:
+                return True
+            else:
+                return False
 
 # 30 Points
 def test2():
@@ -189,20 +204,60 @@ class SuffixArray():
         """
         Creates a suffix array for document (a string).
         """
-        pass
+        self.arr = [i for i in range(0,len(document))]
+        def strsort(x,y):
+            if document[x:] < document[y:]:
+                return -1
+            elif document[x:] > document[y:]:
+                return 1
+            else:
+                return 0
+        mysort(self.arr, strsort)
+        self.doc = document
 
 
     def positions(self, searchstr: str):
         """
         Returns all the positions of searchstr in the documented indexed by the suffix array.
         """
-        pass
+        def sestr(x,y):
+            if len(self.doc)-x >= len(y):
+                if self.doc[x:x+len(y)] == y:
+                    return 0
+                elif self.doc[x:x+len(y)] > y:
+                    return 1
+                else:
+                    return -1
+            else:
+                if self.doc[x:] > y:
+                    return 1
+                else:
+                    return -1
+        pos = mybinsearch(self.arr, searchstr, sestr)
+        print(searchstr)
+        return [pos]
 
     def contains(self, searchstr: str):
         """
         Returns true of searchstr is coontained in document.
         """
-        pass
+        def sestr(x,y):
+            if len(self.doc[x:]) >= len(y):
+                if self.doc[x: x+len(y)] == y:
+                    return 0
+                elif self.doc[x: x+len(y)] > y:
+                    return 1
+                else:
+                    return -1
+            else:
+                if self.doc[x:] > y:
+                    return 1
+                else:
+                    return -1
+        if mybinsearch(self.arr, searchstr, sestr) != -1:
+            return True
+        else:
+            return False
 
 # 40 Points
 def test3():
