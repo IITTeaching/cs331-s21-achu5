@@ -17,7 +17,7 @@ def mysort(lst: List[T], compare: Callable[[T, T], int]) -> List[T]:
     right element, 1 if the left is larger than the right, and 0 if the two
     elements are equal.
     """
-        for i in range(1,len(lst)):
+    for i in range(1,len(lst)):
         for k in range(i, 0, -1):
             if compare(lst[k], lst[k-1]) <=0:
                 lst[k], lst[k-1] = lst[k-1], lst[k]
