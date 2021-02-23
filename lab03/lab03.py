@@ -234,7 +234,6 @@ class SuffixArray():
                 else:
                     return -1
         pos = mybinsearch(self.arr, searchstr, sestr)
-        print(searchstr)
         return [pos]
 
     def contains(self, searchstr: str):
