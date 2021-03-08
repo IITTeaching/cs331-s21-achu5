@@ -174,6 +174,7 @@ class ArrayList:
         """Deletes and returns the element at idx (which is the last element,
         by default)."""
         ### BEGIN SOLUTION
+        actualen = idx
         if actualen < 0:
             actualen += self.len
         arr = ConstrainedList(len(self.data))
