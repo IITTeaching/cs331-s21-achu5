@@ -357,7 +357,8 @@ class LinkedList:
     def extend(self, other):
         """Adds all elements, in order, from other --- an Iterable --- to this list."""
         ### BEGIN SOLUTION
-        
+        for i in range(len(other)):
+          self.append(other[i])
         ### END SOLUTION
 
     ### iteration ###
