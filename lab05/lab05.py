@@ -364,8 +364,10 @@ class LinkedList:
     def __iter__(self):
         """Supports iteration (via `iter(self)`)"""
         ### BEGIN SOLUTION
-        for i in range(len(other)):
-          self.append(other[i])
+        cur = self.head.next
+        for i in range(self.length):
+            yield cur.val
+            cur = cur.next
         ### END SOLUTION
 
     ### reverse ###
