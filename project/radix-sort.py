@@ -19,28 +19,31 @@ def radix_a_book(book_url='https://www.gutenberg.org/files/84/84-0.txt'):
             buckets[lst[k][i]] -= 1
         return inter
 
-    file = urllib.request.urlopen(bookUrl).read().decode()
-    list = file.split()
+    if type(book_url) is str:
+      file = urllib.request.urlopen(book_url).read().decode()
+      mylist = file.split()
+    if type(book_url) is list:
+      mylist = book_url
 
     #finds longest character
-    longest = len(list[0])
-    for i in list:
+    longest = len(mylist[0])
+    for i in mylist:
         if len(i) > longest:
             longest = len(i)
 
     # pads strings with space
-    for i in range(0, len(list)):
-        if len(list[i]) < longest:
-            list[i] = list[i] + "\0" * (longest - len(list[i]))
+    for i in range(0, len(mylist)):
+        if len(mylist[i]) < longest:
+            mylist[i] = mylist[i] + "\0" * (longest - len(mylist[i]))
 
     #turns each string to byte
-    for i in range(len(list)):
-        list[i] = list[i].encode('ascii', 'replace')
+    for i in range(len(mylist)):
+        mylist[i] = mylist[i].encode('ascii', 'replace')
 
     #radix sort using counting sort
-    listToSort = list
+    listToSort = mylist
     for i in range(longest-1, -1, -1):
         listToSort = countingsort(listToSort, i)
-    for i in range(len(list)):
+    for i in range(len(mylist)):
         listToSort[i] = listToSort[i].decode("ASCII").strip("\0")
     return listToSort
