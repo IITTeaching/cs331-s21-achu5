@@ -1,23 +1,48 @@
 from unittest import TestCase
 import random
+import statistics
+def pivotfunction(lst, low, high, pivot):
+    startpointer = low
+    endpointer = high
+    piv = pivot
+
+    #print(lst, low, high, pivot)
+    while startpointer < endpointer:
+        while startpointer < endpointer and lst[startpointer] < piv:
+            startpointer += 1
+        while endpointer >= startpointer and lst[endpointer] > piv:
+            endpointer -= 1
+        if startpointer < endpointer:
+            lst[startpointer], lst[endpointer] = lst[endpointer], lst[startpointer]
+    return endpointer
 
 def quicksort(lst,pivot_fn):
     qsort(lst,0,len(lst) - 1,pivot_fn)
 
 def qsort(lst,low,high,pivot_fn):
     ### BEGIN SOLUTION
+    if low < high:
+        #print(lst, low, high)
+        partition = pivotfunction(lst, low, high, pivot_fn(lst,low, high))
+        qsort(lst, low, partition-1, pivot_fn)
+        qsort(lst, partition+1, high, pivot_fn)
+
     ### END SOLUTION
 
 def pivot_first(lst,low,high):
     ### BEGIN SOLUTION
+    return lst[low]
+
     ### END SOLUTION
 
 def pivot_random(lst,low,high):
     ### BEGIN SOLUTION
+    return lst[random.randrange(low, high+1)]
     ### END SOLUTION
 
 def pivot_median_of_three(lst,low,high):
     ### BEGIN SOLUTION
+    return statistics.median([lst[low], lst[(low + high) // 2], lst[high]])
     ### END SOLUTION
 
 ################################################################################
